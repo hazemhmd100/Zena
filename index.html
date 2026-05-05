@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>زينة كافيه | Zaina Cafe</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700;900&family=Lateef:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5E6C0;
+    --brown-dark: #2C1A0E;
+    --brown-mid: #5C3D1E;
+    --brown-warm: #8B5E3C;
+    --cream: #FAF3E0;
+    --cream-dark: #F0E4C4;
+    --text-dark: #1A0F05;
+    --text-mid: #4A2F14;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--cream);
+    font-family: 'Amiri', serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(92,61,30,0.06) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    text-align: center;
+    padding: 50px 20px 40px;
+    position: relative;
+    animation: fadeDown 0.9s ease both;
+  }
+
+  .header-border-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .header-border-top .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .diamond {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .diamond.small { width: 6px; height: 6px; }
+
+  .logo-icon {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(201,168,76,0.3));
+  }
+
+  .cafe-name-ar {
+    font-family: 'Lateef', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: var(--brown-dark);
+    line-height: 1;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cafe-name-en {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  .tagline {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--brown-warm);
+    margin-top: 14px;
+    font-style: italic;
+    letter-spacing: 0.5px;
+  }
+
+  .ornament {
+    color: var(--gold);
+    font-size: 1.4rem;
+    margin: 0 8px;
+    opacity: 0.8;
+  }
+
+  /* ===== CATEGORY FILTER ===== */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 36px 0 44px;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--brown-mid);
+    font-family: 'Amiri', serif;
+    font-size: 0.95rem;
+    padding: 7px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--gold);
+    color: var(--brown-dark);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(201,168,76,0.3);
+    transform: translateY(-1px);
+  }
+
+  /* ===== SECTION ===== */
+  .menu-section {
+    margin-bottom: 50px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--gold-pale);
+    position: relative;
+  }
+
+  .section-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 4px rgba(201,168,76,0.3));
+  }
+
+  .section-title {
+    font-family: 'Lateef', serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-weight: 700;
+    color: var(--brown-dark);
+    line-height: 1.1;
+  }
+
+  .section-title-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  /* ===== MENU ITEMS ===== */
+  .items-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .items-grid.two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 600px) {
+    .items-grid.two-col { grid-template-columns: 1fr; }
+  }
+
+  .menu-item {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    cursor: default;
+  }
+
+  .menu-item:hover {
+    background: rgba(255,255,255,0.85);
+    border-color: var(--gold);
+    transform: translateX(-3px);
+    box-shadow: 4px 4px 20px rgba(201,168,76,0.12), -2px -2px 10px rgba(255,255,255,0.8);
+  }
+
+  .item-name {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .item-sub {
+    font-size: 0.82rem;
+    color: var(--brown-warm);
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .price-unit {
+    font-size: 0.7rem;
+    color: var(--brown-warm);
+    font-family: 'Amiri', serif;
+    display: block;
+    text-align: center;
+  }
+
+  /* ===== SPECIAL ITEMS (dual price) ===== */
+  .menu-item.dual {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dual-prices {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .price-tag {
+    background: linear-gradient(135deg, var(--gold-pale), var(--cream-dark));
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 5px 12px;
+    text-align: center;
+    min-width: 70px;
+  }
+
+  .price-tag .label {
+    font-size: 0.72rem;
+    color: var(--brown-warm);
+    font-family: 'Amiri', serif;
+    display: block;
+  }
+
+  .price-tag .amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brown-dark);
+  }
+
+  /* ===== NOTE ===== */
+  .section-note {
+    font-size: 0.85rem;
+    color: var(--brown-warm);
+    font-style: italic;
+    margin-bottom: 14px;
+    padding: 8px 14px;
+    background: rgba(201,168,76,0.08);
+    border-right: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid var(--gold-pale);
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .footer-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .footer-line.rev {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .footer-text {
+    font-family: 'Lateef', serif;
+    font-size: 1.4rem;
+    color: var(--brown-warm);
+  }
+
+  .footer-sub {
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .menu-section:nth-child(1) { animation-delay: 0.1s; }
+  .menu-section:nth-child(2) { animation-delay: 0.2s; }
+  .menu-section:nth-child(3) { animation-delay: 0.3s; }
+  .menu-section:nth-child(4) { animation-delay: 0.4s; }
+  .menu-section:nth-child(5) { animation-delay: 0.5s; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-border-top">
+      <div class="line"></div>
+      <div class="diamond small"></div>
+      <div class="diamond"></div>
+      <div class="diamond small"></div>
+      <div class="line"></div>
+    </div>
+    <span class="logo-icon">☕</span>
+    <h1 class="cafe-name-ar">زينة كافيه</h1>
+    <p class="cafe-name-en">ZAINA CAFE</p>
+    <p class="tagline">
+      <span class="ornament">✦</span>
+      نعتني بمزاجك.. ونشبع حواسك
+      <span class="ornament">✦</span>
+    </p>
+    <div class="header-border-top" style="margin-top:28px; margin-bottom:0;">
+      <div class="line"></div>
+      <div class="diamond small"></div>
+      <div class="diamond"></div>
+      <div class="diamond small"></div>
+      <div class="line"></div>
+    </div>
+  </header>
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterSections('all', this)">الكل</button>
+    <button class="filter-btn" onclick="filterSections('hot', this)">☕ مشروبات ساخنة</button>
+    <button class="filter-btn" onclick="filterSections('juice', this)">🍹 عصائر</button>
+    <button class="filter-btn" onclick="filterSections('cold', this)">🥤 مشروبات باردة</button>
+    <button class="filter-btn" onclick="filterSections('sandwich', this)">🌯 ساندوتشات</button>
+    <button class="filter-btn" onclick="filterSections('meals', this)">🍴 وجبات زينة</button>
+  </div>
+
+  <!-- HOT DRINKS -->
+  <section class="menu-section" data-cat="hot">
+    <div class="section-header">
+      <span class="section-icon">☕</span>
+      <div>
+        <h2 class="section-title">المشروبات الساخنة</h2>
+        <span class="section-title-en">Hot Drinks</span>
+      </div>
+    </div>
+    <div class="items-grid two-col">
+      <div class="menu-item">
+        <span class="item-name">قهوة</span>
+        <div class="item-price">10 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">نسكافيه</span>
+        <div class="item-price">7 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">كابتشينو</span>
+        <div class="item-price">7 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">شاي لاتيه</span>
+        <div class="item-price">7 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">شوكو ساخن</span>
+        <div class="item-price">7 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">شاي</span>
+        <div class="item-price">7 <span class="price-unit">ريال</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRESH JUICES -->
+  <section class="menu-section" data-cat="juice">
+    <div class="section-header">
+      <span class="section-icon">🍹</span>
+      <div>
+        <h2 class="section-title">العصائر الطبيعية</h2>
+        <span class="section-title-en">Fresh Juices</span>
+      </div>
+    </div>
+    <div class="items-grid">
+      <div class="menu-item">
+        <span class="item-name">أفوكادو | كوكتيل</span>
+        <div class="item-price">20 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">شمام | خوخ | مانجا</span>
+        <div class="item-price">15 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">أناناس | ليمون ونعناع</span>
+        <div class="item-price">15 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">جوافة</span>
+        <div class="item-price">15 <span class="price-unit">ريال</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLD DRINKS -->
+  <section class="menu-section" data-cat="cold">
+    <div class="section-header">
+      <span class="section-icon">🥤</span>
+      <div>
+        <h2 class="section-title">مشروبات باردة</h2>
+        <span class="section-title-en">Cold Drinks</span>
+      </div>
+    </div>
+    <div class="items-grid two-col">
+      <div class="menu-item">
+        <span class="item-name">كولا | مشروب طاقة</span>
+        <div class="item-price">8 <span class="price-unit">ريال</span></div>
+      </div>
+      <div class="menu-item">
+        <span class="item-name">ماء</span>
+        <div class="item-price">3 <span class="price-unit">ريال</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SANDWICHES -->
+  <section class="menu-section" data-cat="sandwich">
+    <div class="section-header">
+      <span class="section-icon">🌯</span>
+      <div>
+        <h2 class="section-title">الساندوتشات</h2>
+        <span class="section-title-en">Sandwiches</span>
+      </div>
+    </div>
+    <p class="section-note">على الفحم | متوفر خبز عادي أو فرشوحة 🔥</p>
+    <div class="items-grid">
+      <div class="menu-item dual">
+        <span class="item-name">شاورما على الفحم</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">فرشوحة</span>
+            <span class="amount">25</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">ساندوتش</span>
+            <span class="amount">15</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">شيش طاووق</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">فرشوحة</span>
+            <span class="amount">20</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">ساندوتش</span>
+            <span class="amount">10</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">كباب</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">فرشوحة</span>
+            <span class="amount">15</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">ساندوتش</span>
+            <span class="amount">10</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">تايلندي</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">فرشوحة</span>
+            <span class="amount">10</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">ساندوتش</span>
+            <span class="amount">7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN MEALS -->
+  <section class="menu-section" data-cat="meals">
+    <div class="section-header">
+      <span class="section-icon">🍴</span>
+      <div>
+        <h2 class="section-title">وجبات زينة الرئيسية</h2>
+        <span class="section-title-en">Zaina Main Meals</span>
+      </div>
+    </div>
+    <p class="section-note">تُقدم مع المقبلات والسلطات 🥗</p>
+    <div class="items-grid">
+      <div class="menu-item dual">
+        <span class="item-name">مشاوي مشكل</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">شخص</span>
+            <span class="amount">30</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">شخصين</span>
+            <span class="amount">60</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">أجنحة دجاج</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">شخص</span>
+            <span class="amount">30</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">شخصين</span>
+            <span class="amount">60</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">دبوس دجاج</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">شخص</span>
+            <span class="amount">30</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">شخصين</span>
+            <span class="amount">60</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">دجاج مسحب</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">شخص</span>
+            <span class="amount">30</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">شخصين</span>
+            <span class="amount">60</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">دجاج مشوي</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">نص جاجة</span>
+            <span class="amount">30</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">كاملة</span>
+            <span class="amount">60</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">كباب | كباب تركي</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">شخص</span>
+            <span class="amount">25</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">شخصين</span>
+            <span class="amount">50</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item dual">
+        <span class="item-name">شيش طاووق</span>
+        <div class="dual-prices">
+          <div class="price-tag">
+            <span class="label">شخص</span>
+            <span class="amount">25</span>
+          </div>
+          <div class="price-tag">
+            <span class="label">شخصين</span>
+            <span class="amount">50</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-ornament">
+      <div class="footer-line"></div>
+      <span style="color:var(--gold); font-size:1.3rem;">✦</span>
+      <div class="footer-line rev"></div>
+    </div>
+    <p class="footer-text">شكراً لزيارتكم زينة كافيه ☕</p>
+    <p class="footer-sub" style="margin-top:8px;">ZAINA CAFE — EST. 2024</p>
+  </footer>
+
+</div>
+
+<script>
+  function filterSections(cat, btn) {
+    // Update buttons
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide sections
+    document.querySelectorAll('.menu-section').forEach(sec => {
+      if (cat === 'all' || sec.dataset.cat === cat) {
+        sec.classList.remove('hidden');
+        sec.style.animation = 'none';
+        sec.offsetHeight; // reflow
+        sec.style.animation = 'fadeUp 0.5s ease both';
+      } else {
+        sec.classList.add('hidden');
+      }
+    });
+  }
+</script>
+</body>
+</html>
